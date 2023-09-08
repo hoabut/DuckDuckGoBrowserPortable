@@ -1,0 +1,2 @@
+# ignore files that exceeds GitHub's file size limit of 100.00 MB
+DuckDuckGoBrowserPortable/App/DuckDuckGoBrowser/WebView2/msedge.dll

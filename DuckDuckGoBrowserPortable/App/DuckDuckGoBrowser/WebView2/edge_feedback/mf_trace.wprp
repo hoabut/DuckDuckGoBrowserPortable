@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WindowsPerformanceRecorder   Version="1" Author="DiagTrack Scenario Editor" Copyright="Microsoft Corporation" Company="Microsoft Corporation" >
+  <Profiles>
+    <EventCollector Id="EventCollector_DiagTrack_096dfc7bdff54af28935efd2efcceadc_0" Name="DiagTrack_096dfc7bdff54af28935efd2efcceadc_0">
+      <BufferSize Value="256" />
+      <Buffers Value="3" PercentageOfTotalMemory="true" MaximumBufferSpace="64" />
+    </EventCollector>
+    <EventCollector Id="EventCollector_DiagTrack_096dfc7bdff54af28935efd2efcceadc_1" Name="DiagTrack_096dfc7bdff54af28935efd2efcceadc_1">
+      <BufferSize Value="1024" />
+      <Buffers Value="3" PercentageOfTotalMemory="true" MaximumBufferSpace="128" />
+    </EventCollector>
+    <EventProvider Id="EventProvider_00000007-0dc9-401d-b9b8-05e4eca4977e_0" Name="00000007-0dc9-401d-b9b8-05e4eca4977e" NonPagedMemory="true" Level="32">
+      <Keywords>
+        <Keyword Value="0x7FFFFFFF" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_00000006-0dc9-401d-b9b8-05e4eca4977e_0" Name="00000006-0dc9-401d-b9b8-05e4eca4977e" NonPagedMemory="true" Level="32">
+      <Keywords>
+        <Keyword Value="0x7FFFFFFF" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_00000005-0dc9-401d-b9b8-05e4eca4977e_0" Name="00000005-0dc9-401d-b9b8-05e4eca4977e" NonPagedMemory="true" Level="32">
+      <Keywords>
+        <Keyword Value="0x7FFFFFFF" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_00000002-0dc9-401d-b9b8-05e4eca4977e_0" Name="00000002-0dc9-401d-b9b8-05e4eca4977e" NonPagedMemory="true" Level="32">
+      <Keywords>
+        <Keyword Value="0x7FFFFFFF" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_00000003-0dc9-401d-b9b8-05e4eca4977e_0" Name="00000003-0dc9-401d-b9b8-05e4eca4977e" NonPagedMemory="true" Level="32">
+      <Keywords>
+        <Keyword Value="0x7FFFFFFF" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_c9c074d2-ff9b-410f-8ac6-81c7b8e60d0f_0" Name="c9c074d2-ff9b-410f-8ac6-81c7b8e60d0f" NonPagedMemory="true" Level="32">
+      <Keywords>
+        <Keyword Value="0x7FFFFFFF" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_00000004-0dc9-401d-b9b8-05e4eca4977e_0" Name="00000004-0dc9-401d-b9b8-05e4eca4977e" NonPagedMemory="true" Level="32">
+      <Keywords>
+        <Keyword Value="0x7FFFFFFF" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_00000001-0dc9-401d-b9b8-05e4eca4977e_0" Name="00000001-0dc9-401d-b9b8-05e4eca4977e" NonPagedMemory="true" Level="32">
+      <Keywords>
+        <Keyword Value="0x7FFFFFFF" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_00000000-0dc9-401d-b9b8-05e4eca4977e_0" Name="00000000-0dc9-401d-b9b8-05e4eca4977e" NonPagedMemory="true" Level="32">
+      <Keywords>
+        <Keyword Value="0x7FFFFFFF" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_362007f7-6e50-4044-9082-dfa078c63a73_0" Name="362007f7-6e50-4044-9082-dfa078c63a73" NonPagedMemory="true" Level="5">
+      <Keywords>
+        <Keyword Value="0xFFFFFFFF" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_00000000-7ac4-430a-94e4-b0dfd254650f_0" Name="00000000-7ac4-430a-94e4-b0dfd254650f" NonPagedMemory="true" Level="32">
+      <Keywords>
+        <Keyword Value="0xFFFFFFFF" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_5b1c79f0-a7b1-4fb1-a3c7-374528a7b075_1" Name="5b1c79f0-a7b1-4fb1-a3c7-374528a7b075" NonPagedMemory="true" Level="5">
+      <Keywords>
+        <Keyword Value="0" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_6a1f212d-9fc8-4878-bcf4-4be623b84525_1" Name="6a1f212d-9fc8-4878-bcf4-4be623b84525" NonPagedMemory="true" Level="3">
+      <Keywords>
+        <Keyword Value="0" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_0d641fb9-a0e3-42e3-9e9d-501d33a6fa79_1" Name="0d641fb9-a0e3-42e3-9e9d-501d33a6fa79" NonPagedMemory="true" Level="5">
+      <Keywords>
+        <Keyword Value="0" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_1123dc81-0423-4f27-bf57-6619e6bf85cc_1" Name="1123dc81-0423-4f27-bf57-6619e6bf85cc" NonPagedMemory="true" Level="5">
+      <Keywords>
+        <Keyword Value="0" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_3a2e5a5c-9cac-5e49-f93a-fbe76451b4ad_1" Name="3a2e5a5c-9cac-5e49-f93a-fbe76451b4ad" NonPagedMemory="true" Level="5">
+      <Keywords>
+        <Keyword Value="0" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_8f2048e0-f260-4f57-a8d1-932376291682_1" Name="8f2048e0-f260-4f57-a8d1-932376291682" NonPagedMemory="true" Level="5">
+      <Keywords>
+        <Keyword Value="0" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_7cffb6e3-de5a-572a-9ece-998321af6e81_1" Name="7cffb6e3-de5a-572a-9ece-998321af6e81" NonPagedMemory="true" Level="5">
+      <Keywords>
+        <Keyword Value="0" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_53cc8a8b-3182-5101-7405-8dfc7e5f313e_1" Name="53cc8a8b-3182-5101-7405-8dfc7e5f313e" NonPagedMemory="true" Level="5">
+      <Keywords>
+        <Keyword Value="0" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_3e72573a-5c5f-5ed8-d6f1-f1b44db1b81b_1" Name="3e72573a-5c5f-5ed8-d6f1-f1b44db1b81b" NonPagedMemory="true" Level="5">
+      <Keywords>
+        <Keyword Value="0" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_f404b94e-27e0-4384-bfe8-1d8d390b0aa3_1" Name="f404b94e-27e0-4384-bfe8-1d8d390b0aa3" NonPagedMemory="true" Level="5">
+      <Keywords>
+        <Keyword Value="0" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_b20e65ac-c905-4014-8f78-1b6a508142eb_1" Name="b20e65ac-c905-4014-8f78-1b6a508142eb" NonPagedMemory="true" Level="5">
+      <Keywords>
+        <Keyword Value="0" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_0c1ce4ca-b223-4bec-8aa2-156f6a292344_1" Name="0c1ce4ca-b223-4bec-8aa2-156f6a292344" NonPagedMemory="true" Level="5">
+      <Keywords>
+        <Keyword Value="0" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_6b4e98da-b103-588e-d0db-c7a111582066_1" Name="6b4e98da-b103-588e-d0db-c7a111582066" NonPagedMemory="true" Level="5">
+      <Keywords>
+        <Keyword Value="0" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_a4112d1a-6dfa-476e-bb75-e350d24934e1_1" Name="a4112d1a-6dfa-476e-bb75-e350d24934e1" NonPagedMemory="true" Level="5">
+      <Keywords>
+        <Keyword Value="0" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_28cf047a-2437-4b24-b653-b9446a419a69_1" Name="28cf047a-2437-4b24-b653-b9446a419a69" NonPagedMemory="true" Level="5">
+      <Keywords>
+        <Keyword Value="0" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_a6bf0deb-3659-40ad-9f81-e25af62ce3c7_1" Name="a6bf0deb-3659-40ad-9f81-e25af62ce3c7" NonPagedMemory="true" Level="5">
+      <Keywords>
+        <Keyword Value="0" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_e18d0fc9-9515-4232-98e4-89e456d8551b_1" Name="e18d0fc9-9515-4232-98e4-89e456d8551b" NonPagedMemory="true" Level="5">
+      <Keywords>
+        <Keyword Value="0" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_8f0db3a8-299b-4d64-a4ed-907b409d4584_1" Name="8f0db3a8-299b-4d64-a4ed-907b409d4584" NonPagedMemory="true" Level="5">
+      <Keywords>
+        <Keyword Value="0" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_6ade59e8-_a7c0-53d6-c3e0-8fe89759ca13_1" Name="6ade59e8- a7c0-53d6-c3e0-8fe89759ca13" NonPagedMemory="true" Level="5">
+      <Keywords>
+        <Keyword Value="0" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_fc40bb95-_722a-5366-9c5e-1a73d989faea_1" Name="fc40bb95- 722a-5366-9c5e-1a73d989faea" NonPagedMemory="true" Level="5">
+      <Keywords>
+        <Keyword Value="0" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_645a72a6-_1657-53bb-d5e7-d6526033ef20_1" Name="645a72a6- 1657-53bb-d5e7-d6526033ef20" NonPagedMemory="true" Level="5">
+      <Keywords>
+        <Keyword Value="0" />
+      </Keywords>
+    </EventProvider>
+    <EventProvider Id="EventProvider_ff32ada1-5a4b-583c-889e-a3c027b201f5_1" Name="ff32ada1-5a4b-583c-889e-a3c027b201f5" NonPagedMemory="true" Level="5">
+      <Keywords>
+        <Keyword Value="0x0" />
+      </Keywords>
+    </EventProvider>
+    <Profile Id="MFTrace.Verbose.Memory" Name="MFTrace" Description="Generated by DiagTrack Scenario Editor (TraceId=096dfc7b-dff5-4af2-8935-efd2efcceadc)" LoggingMode="Memory" DetailLevel="Verbose">
+      <Collectors>
+        <EventCollectorId Value="EventCollector_DiagTrack_096dfc7bdff54af28935efd2efcceadc_0">
+          <EventProviders>
+            <EventProviderId Value="EventProvider_00000007-0dc9-401d-b9b8-05e4eca4977e_0" />
+            <EventProviderId Value="EventProvider_00000006-0dc9-401d-b9b8-05e4eca4977e_0" />
+            <EventProviderId Value="EventProvider_00000005-0dc9-401d-b9b8-05e4eca4977e_0" />
+            <EventProviderId Value="EventProvider_00000002-0dc9-401d-b9b8-05e4eca4977e_0" />
+            <EventProviderId Value="EventProvider_00000003-0dc9-401d-b9b8-05e4eca4977e_0" />
+            <EventProviderId Value="EventProvider_c9c074d2-ff9b-410f-8ac6-81c7b8e60d0f_0" />
+            <EventProviderId Value="EventProvider_00000004-0dc9-401d-b9b8-05e4eca4977e_0" />
+            <EventProviderId Value="EventProvider_00000001-0dc9-401d-b9b8-05e4eca4977e_0" />
+            <EventProviderId Value="EventProvider_00000000-0dc9-401d-b9b8-05e4eca4977e_0" />
+            <EventProviderId Value="EventProvider_362007f7-6e50-4044-9082-dfa078c63a73_0" />
+            <EventProviderId Value="EventProvider_00000000-7ac4-430a-94e4-b0dfd254650f_0" />
+          </EventProviders>
+        </EventCollectorId>
+        <EventCollectorId Value="EventCollector_DiagTrack_096dfc7bdff54af28935efd2efcceadc_1">
+          <EventProviders>
+            <EventProviderId Value="EventProvider_5b1c79f0-a7b1-4fb1-a3c7-374528a7b075_1" />
+            <EventProviderId Value="EventProvider_6a1f212d-9fc8-4878-bcf4-4be623b84525_1" />
+            <EventProviderId Value="EventProvider_0d641fb9-a0e3-42e3-9e9d-501d33a6fa79_1" />
+            <EventProviderId Value="EventProvider_1123dc81-0423-4f27-bf57-6619e6bf85cc_1" />
+            <EventProviderId Value="EventProvider_3a2e5a5c-9cac-5e49-f93a-fbe76451b4ad_1" />
+            <EventProviderId Value="EventProvider_8f2048e0-f260-4f57-a8d1-932376291682_1" />
+            <EventProviderId Value="EventProvider_7cffb6e3-de5a-572a-9ece-998321af6e81_1" />
+            <EventProviderId Value="EventProvider_53cc8a8b-3182-5101-7405-8dfc7e5f313e_1" />
+            <EventProviderId Value="EventProvider_3e72573a-5c5f-5ed8-d6f1-f1b44db1b81b_1" />
+            <EventProviderId Value="EventProvider_f404b94e-27e0-4384-bfe8-1d8d390b0aa3_1" />
+            <EventProviderId Value="EventProvider_b20e65ac-c905-4014-8f78-1b6a508142eb_1" />
+            <EventProviderId Value="EventProvider_0c1ce4ca-b223-4bec-8aa2-156f6a292344_1" />
+            <EventProviderId Value="EventProvider_6b4e98da-b103-588e-d0db-c7a111582066_1" />
+            <EventProviderId Value="EventProvider_a4112d1a-6dfa-476e-bb75-e350d24934e1_1" />
+            <EventProviderId Value="EventProvider_28cf047a-2437-4b24-b653-b9446a419a69_1" />
+            <EventProviderId Value="EventProvider_a6bf0deb-3659-40ad-9f81-e25af62ce3c7_1" />
+            <EventProviderId Value="EventProvider_e18d0fc9-9515-4232-98e4-89e456d8551b_1" />
+            <EventProviderId Value="EventProvider_8f0db3a8-299b-4d64-a4ed-907b409d4584_1" />
+            <EventProviderId Value="EventProvider_6ade59e8-_a7c0-53d6-c3e0-8fe89759ca13_1" />
+            <EventProviderId Value="EventProvider_fc40bb95-_722a-5366-9c5e-1a73d989faea_1" />
+            <EventProviderId Value="EventProvider_645a72a6-_1657-53bb-d5e7-d6526033ef20_1" />
+            <EventProviderId Value="EventProvider_ff32ada1-5a4b-583c-889e-a3c027b201f5_1" />
+          </EventProviders>
+        </EventCollectorId>
+      </Collectors>
+    </Profile>
+  </Profiles>
+</WindowsPerformanceRecorder>
