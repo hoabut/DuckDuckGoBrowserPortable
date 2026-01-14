@@ -1,4 +1,4 @@
-![image info](./duckduckgobrowserportable_readme_version_0.47.1_gh_files/media/image1.png)
+![image info](./duckduckgobrowserportable_readme_version_0.141.10_gh_files/media/image1.png)
 
 DuckDuckGo Browser Portable
 
@@ -11,12 +11,29 @@ cloud folder, portable drive, or local folder without needing to install
 it on each PC. Learn more about [DuckDuckGo
 Browser](https://www.duckduckgo.com/) ...
 
-September 2, 2023 release version 0.47.1:
+January 9 2026 release version 0.141.10:
 
-Notables in this release: Initial release
+Notables in this release:
+
+PAF 3.9
+
+Minimum OS requirements:
+
+Windows 10 version 1607 (Source: Microsoft)
+
+Windows Server 2016 (Source: Microsoft)
+
+Windows 10 May 2020 or later (Source: DuckDuckGo)
+
+Microsoft Edge WebView2, at of latest, requires the above minimum OS
+requirements because DPI_AWARENESS (GetDpiForWindow function in
+winuser.h) feature requires them. 'Backporting' such a feature to
+earlier Windows versions is not worth the effort or time or both. In
+addition, this is a browser so it is highly recommended to use an
+'actively servicing' OS.
 
 [Download latest
-release](https://github.com/hoabut/DuckDuckGoBrowserPortable/releases/tag/v0.47.1)
+release](https://github.com/hoabut/DuckDuckGoBrowserPortable/releases/tag/v0.141.10)
 
 [Go to the DuckDuckGo Browser Portable
 Homepage](https://portableapps.com/node/68697)
@@ -63,7 +80,9 @@ Rename \"\$EXEDIR\\App\\DuckDuckGoBrowser\\DuckDuckGo.Updater.dll\"
 
 In addition, DuckDuckGo Browser also leaves behind "breadcrumbs" in
 \\ProgramData\\Microsoft\\NetFramework\\BreadcrumbStore\\ with a large
-percentage of them belonging to the system. It seems all of the files
+percentage of them belonging to the system. During extremely rare times
+this directory, \\ProgramData\\Microsoft\\NetFramework\\BreadcrumbStore,
+requires elevated access to see its contents. It seems all of the files
 generated are zero bytes. In DuckDuckGoBrowserPortable.ini some
 directories moves and force cleanups:
 

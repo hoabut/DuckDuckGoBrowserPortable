@@ -1,2 +1,7 @@
 # ignore files that exceeds GitHub's file size limit of 100.00 MB
+DuckDuckGoBrowserPortable/App/DuckDuckGoBrowser/libcef.dll
 DuckDuckGoBrowserPortable/App/DuckDuckGoBrowser/WebView2/msedge.dll
+# to keep commits below 2 GB and file size limit of 100.00 MB: first ignore /.sync/ directories
+# for DuckDuckGoBrowserPortable the /.sync/ subdirectory is outside of the DuckDuckGoBrowserPortable git directory
+# so /.sync/ may not exist inside DuckDuckGoBrowserPortable git directory
+DuckDuckGoBrowserPortable/.sync/
