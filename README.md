@@ -24,7 +24,7 @@ to move files, directories, registry entries, and more to portable data
 directory
 
 [Download latest
-release](https://github.com/hoabut/DuckDuckGoBrowserPortable/releases/download/v0.160.10)
+release](https://github.com/hoabut/DuckDuckGoBrowserPortable/releases/tag/v0.160.10)
 
 [Go to the DuckDuckGo Browser Portable
 Homepage](https://portableapps.com/node/68697)
