@@ -1,0 +1,2645 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DuckDuckGo.CefView</name>
+    </assembly>
+    <members>
+        <member name="M:DuckDuckGo.CefView.CefTimeHelper.ToWindowsMicroseconds(System.DateTime)">
+            <summary>
+            Converts a DateTime to a microsecond count since Windows epoch (January 1, 1601 UTC).
+            </summary>
+            <param name="dateTime">The DateTime to convert.</param>
+            <returns>Number of microseconds since Windows epoch; returns 0 if dateTime is before the epoch.</returns>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CefTimeHelper.FromWindowsMicroseconds(System.Int64)">
+            <summary>
+            Converts a microsecond count since Windows epoch (January 1, 1601 UTC) back to a DateTime.
+            </summary>
+            <param name="windowsMicroseconds">Microseconds since Windows epoch.</param>
+            <returns>The corresponding UTC DateTime.</returns>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefView.Source">
+            <summary>
+            URI of the top level document.
+            </summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefView.Navigate(System.String)">
+            <summary>
+            Causes a navigation of the top level document to the specified URI.
+            </summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefView.NavigateToString(System.String)">
+            <summary>
+            Initiates a navigation to htmlContent as source HTML of a new document.
+            </summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefView.Print">
+            <summary>
+            Shows the Print UI asynchronously
+            </summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefView.PrintToPdfFile(System.String,DuckDuckGo.CefView.CoreCefViewPrintSettings)">
+            <summary>
+            Print the current page to PDF asynchronously with the provided settings
+            and saves it as filePath overwriting any data that was previously there.
+            </summary>
+            <remarks>
+            Returns true if and only if all of the data was written
+            </remarks>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefView.AddUserScriptAsync(System.Int32,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Add a user script to execute when documents are created. The script runs
+            at document start (before page scripts).
+            Scripts added after browser creation apply to subsequent navigations only.
+            For scripts to run on the first navigation, use CoreCefViewControllerOptions.AddUserScript().
+            </summary>
+            <param name="scriptId">Caller-provided unique ID for the script</param>
+            <param name="javaScript">The JavaScript code to inject</param>
+            <param name="mainFrameOnly">If true, only injects into the main frame</param>
+            <param name="injectInMainWorld">If true, runs in the main world (can access page JS), otherwise runs in an isolated world</param>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefView.RemoveUserScriptAsync(System.Int32)">
+            <summary>
+            Remove a previously registered user script by its ID.
+            </summary>
+            <param name="scriptId">The ID returned from AddUserScriptAsync</param>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefView.RemoveAllUserScriptsAsync">
+            <summary>
+            Remove all registered user scripts for this browser.
+            </summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefView.RestoreNavigationEntries(System.Int32,System.Collections.Generic.IReadOnlyList{DuckDuckGo.CefView.CoreCefViewNavigationEntry})">
+            <summary>
+            Restores the navigation history with the provided entries, replacing the current history.
+            </summary>
+            <param name="currentIndex">The index of the entry to navigate to after restoration (0-based).</param>
+            <param name="entries">The navigation entries to restore.</param>
+            <returns>A task that completes with true if the restoration succeeded, false otherwise.</returns>
+            <exception cref="T:System.InvalidOperationException">Thrown when called from a non-UI thread or after the control is disposed.</exception>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefView.GetNavigationHistoryAsync">
+            <summary>
+            Gets the current navigation history including all entries and the current index.
+            </summary>
+            <returns>A <see cref="T:DuckDuckGo.CefView.CoreCefViewHistoryChangedEventArgs"/> containing the current index and navigation entries.</returns>
+            <exception cref="T:System.InvalidOperationException">Thrown when called from a non-UI thread or after the control is disposed.</exception>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefView.NavigateToHistoryEntry(System.Int32)">
+            <summary>
+            Navigates to a specific entry in the navigation history by index.
+            This is a fire-and-forget operation; navigation completion is signaled
+            through the existing HistoryChanged and NavigationCompleted events.
+            </summary>
+            <param name="index">The 0-based index of the history entry to navigate to.</param>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefView.ResetNavigationHistoryAsync">
+            <summary>
+            Clears all navigation entries except the last committed one.
+            May fail if a navigation is currently in progress.
+            </summary>
+            <returns>A task that completes with true if the history was successfully reset, false otherwise.</returns>
+            <exception cref="T:System.InvalidOperationException">Thrown when called from a non-UI thread or after the control is disposed.</exception>
+        </member>
+        <member name="T:DuckDuckGo.CefView.CoreCefViewClearBrowsingDataOptions.BrowsingDataTypes">
+            <summary>
+            BrowsingDataTypes: these should match cef_browsing_data_types_t
+            </summary>
+        </member>
+        <member name="T:DuckDuckGo.CefView.CoreCefViewClearBrowsingDataOptions.OriginFilterMode">
+            <summary>
+             OriginFilterMode defines how the Origins list should be used.
+             Include: the Origins list is a list of origins to remove.
+             Exclude: the Origins list is a list of origins to retain.
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewContextMenuRequestedEventArgs.MenuItems">
+            <summary>
+            Editable collection of menu items
+            </summary>
+            <remarks>
+            Submenus are expressed as children
+            </remarks>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewContextMenuRequestedEventArgs.Location">
+            <summary>
+            Coordinates where the context menu request occurred in relation to upper left corner of the views bounds.
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewContextMenuRequestedEventArgs.Handled">
+            <summary>
+            Get or set if the event is handled, defaults to false.
+            </summary>
+            <remarks>
+            When set to false drawing of the context menu (including any edits) is done internally.
+            if true you are responsible for drawing and notifying which command id was selected via this.SelectedCommandId
+            </remarks>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewContextMenuRequestedEventArgs.SelectedCommandId">
+            <summary>
+            Gets or set the selected command id
+            </summary>
+            <remarks>
+            Defaults to -1 which will close the internal context menu without any action.
+            </remarks>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewController.WebContentVisibility">
+            <summary>
+            Get or set if the web contents visibility.
+            It has a slightly different meaning compared to WPF Visibility.
+            See CoreCefViewWebContentVisibility for details.
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewController.ParentWindow">
+            <summary>
+            Returns the parent HWND that the view lives in
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewController.Bounds">
+            <summary>
+            Get or set the bounds for the View
+            </summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewControllerOptions.AddUserScript(System.Int32,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Add a user script to inject at document start for this view.
+            Scripts added here are guaranteed to run on the first navigation.
+            </summary>
+            <param name="scriptId">Caller-provided unique ID for the script</param>
+            <param name="javascript">The JavaScript code to inject</param>
+            <param name="mainFrameOnly">If true, only injects into the main frame</param>
+            <param name="injectInMainWorld">If true, runs in the main world (can access page JS), otherwise runs in an isolated world</param>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewControllerOptions.UserScriptCount">
+            <summary>
+            Get the number of user scripts.
+            </summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewControllerOptions.ClearUserScripts">
+            <summary>
+            Clear all user scripts.
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewCookie.Name">
+            <summary>
+            Get the name of the cookie
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewCookie.Value">
+            <summary>
+            Get or set the value of the cookie
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewCookie.Domain">
+            <summary>
+            Gets the domain for which the cookie is valid
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewCookie.Path">
+            <summary>
+            Gets the path for which the cookie is valid
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewCookie.Expires">
+            <summary>
+            The expiration date and time for the cookie
+            </summary>
+            <remarks>
+            Settings to System.DateTime.MinValue makes this a session cookie
+            </remarks>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewCookie.IsHttpOnly">
+            <summary>
+            Get or set if the cookie is HttpOnly
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewCookie.SameSite">
+            <summary>
+            Get or set the cookie same site policy
+            </summary>
+            <remarks>
+            The default value is Lax.
+            </remarks>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewCookie.IsSecure">
+            <summary>
+            Gets or sets the security level of this cookie.
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewCookie.IsSession">
+            <summary>
+            Determines whether this is a session cookie. The default value is true.
+            </summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewCookieManager.CreateCookie(System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates a cookie object from the specified values
+            </summary>
+            <param name="name">Name of the cookie</param>
+            <param name="value">Value</param>
+            <param name="Domain">Domain</param>
+            <param name="Path">Path</param>
+            <returns></returns>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewCookieManager.AddOrUpdateCookie(DuckDuckGo.CefView.CoreCefViewCookie)">
+            <summary>
+            Adds or updates a cookie with the given cookie data.
+            </summary>
+            <param name="cookie">The cookie to be added or updated</param>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewCookieManager.GetCookiesAsync(System.String)">
+            <summary>
+            Get cookies matching the provided URI.
+            </summary>
+            <param name="uri">If URI is empty or null all cookies are returned</param>
+            <returns>List of cookies</returns>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewCookieManager.DeleteCookie(DuckDuckGo.CefView.CoreCefViewCookie)">
+            <summary>
+            Deletes a cookie where the name and domain+path match those in the provided cookie
+            </summary>
+            <param name="cookie"></param>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewCookieManager.DeleteCookies(System.String,System.String)">
+            <summary>
+            Deletes cookies with matching name and URI
+            </summary>
+            <param name="name">The name of the cookie to be deleted</param>
+            <param name="uri">Optional URI to only delete cookies with matching domain+path</param>
+        </member>
+        <member name="T:DuckDuckGo.CefView.CoreCefViewCookieSameSiteKind">
+            <summary>
+            Cookie same site kind. See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie#samesitesamesite-value
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewCookieSameSiteKind.Unspecified">
+            <summary>
+            SameSite is not specified
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewCookieSameSiteKind.None">
+            <summary>
+            None SameSite type. No restrictions on cross-site requests.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewCookieSameSiteKind.Lax">
+            <summary>
+            Lax SameSite type. The cookie will be sent with "same-site" requests, and with "cross-site" top level navigation.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewCookieSameSiteKind.Strict">
+            <summary>
+            Strict SameSite type. The cookie will only be sent along with "same-site" requests.
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewCreateCefViewControllerCompletedHandler.ErrorCode">
+            <summary>
+            Error code (0 on success).
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewCreateCefViewControllerCompletedHandler.LaunchFailure">
+            <summary>
+            Launch failure details (null if not a launch failure).
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewCreateCefViewEnvironmentCompletedHandler.ErrorCode">
+            <summary>
+            Error code (0 on success).
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewCreateCefViewEnvironmentCompletedHandler.LaunchFailure">
+            <summary>
+            Launch failure details (null if not a launch failure).
+            </summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewDevTools.ExecuteDevToolsMethodAsync(System.String,System.String)">
+            <summary>
+            Runs a dev tools protocol method asynchronously
+            </summary>
+            <param name="methodName">Full name of the method in {domain}.{method} format</param>
+            <param name="parametersAsJson">JSON formatted string containing the parameters</param>
+            <returns>a JSON string containing the result</returns>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewDevTools.ExecuteDevToolsMethodForSessionAsync(System.String,System.String,System.String)">
+            <summary>
+            Runs a dev tools protocol method asynchronously for a specific session
+            </summary>
+            <param name="methodName">Full name of the method in {domain}.{method} format</param>
+            <param name="parametersAsJson">JSON formatted string containing the parameters</param>
+            <param name="sessionId">SessionId for attached target</param>
+            <returns>a JSON string containing the result</returns>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewDevTools.GetDevToolsProtocolEventReceiver(System.String)">
+            <summary>
+            Gets a event receiver for a given event that you can subscribe to
+            </summary>
+            <param name="eventName">Full name of the event in {domain}.{event} format</param>
+            <returns>dev tools protocol event receiver</returns>
+        </member>
+        <member name="P:DuckDuckGo.CefView.BrowserProcessStartException.LaunchProcessFailureReason">
+            <summary>
+            Gets the specific reason why launching the browser process failed (from LaunchProcessFailureReason enum in process.h).
+            Only meaningful when the error is HRESULT_BROWSER_START_FAILED_TO_LAUNCH_PROCESS.
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.BrowserProcessStartException.ExitCode">
+            <summary>
+            Gets the exit code of the browser process if it crashed during startup.
+            Only meaningful when the error is HRESULT_BROWSER_CRASHED.
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.BrowserProcessStartException.LaunchAttempts">
+            <summary>
+            Gets the number of launch attempts made before giving up (1 = no retries, 2+ = retries occurred).
+            </summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewEnvironment.GetAssemblyVersion">
+            <summary>
+            Returns the CefView version string E.g: "1.0.0" for the C# API
+            </summary>
+            <remarks>
+            The native CefView version may differ if env:DDGWEBVIEW_BIN_DIR was used
+            </remarks>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewEnvironment.Version">
+            <summary>
+            Returns the CefView version string E.g: "1.0.0"
+            </summary>
+            <remarks>
+            This will be correct even if env:DDGWEBVIEW_BIN_DIR was used
+            </remarks>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewEnvironment.CefVersion">
+            <summary>
+            Returns the full libCEF version string E.g: "130.1.16+g5a7e5ed+chromium-130.0.6723.117"
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewEnvironment.ChromiumVersion">
+            <summary>
+            Returns the ChromiumVersion {major}.{minor}.{patch}.{build}
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewEnvironment.UserDataDirectory">
+            <summary>
+            The UserDataDirectory this environment is using. This maps to cache_path in libCEF
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewEnvironment.IsEmbeddedLoggingEnabled">
+            <summary>
+            Gets whether embedded logging is enabled
+            </summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewEnvironment.EnableEmbeddedLogging(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Enables embedded logging to the specified file path
+            </summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewEnvironment.EnableEmbeddedLogging(System.String,System.Boolean)">
+            <summary>
+            Enables embedded logging to the specified file path
+            </summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewEnvironment.SetEmbeddedLoggingLevel(DuckDuckGo.CefView.CoreCefViewEnvironment.LogLevel)">
+            <summary>
+            Sets the logging level for the embedded logging
+            </summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewEnvironment.WriteEmbeddedLog(DuckDuckGo.CefView.CoreCefViewEnvironment.LogLevel,System.String)">
+            <summary>
+            Writes a message to the embedded log
+            </summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewEnvironment.CreateAsync(System.String,DuckDuckGo.CefView.CoreCefViewEnvironmentOptions)">
+            <summary>
+            Creates a environment using DuckDuckGo.WebView.exe from the working directory.
+            </summary>
+            <param name="userDataFolder">The relative or absolute data folder location to use.
+            <para>
+            Two environments can't share the same dir.
+            The default location is stored in AppData
+            </para>
+            </param>
+            <param name="options">Optional options</param>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewEnvironment.CreateCefViewControllerAsync(System.IntPtr,DuckDuckGo.CefView.CoreCefViewPreferences,DuckDuckGo.CefView.CoreCefViewControllerOptions)">
+            <summary>
+            Asynchronously create CoreCefViewController
+            </summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewEnvironment.Ping(System.UInt64)">
+            <summary>
+            Perform a blocking ping to the IPC broker.
+            This is safe to call on a background thread.
+            </summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewEnvironment.GetOrCreateProfileAsync(System.String,System.Boolean)">
+            <summary>
+            Materializes a profile without creating a view. Used by the embedder
+            for per-profile operations that must succeed before the first view
+            exists — e.g. dispatching a cold-start web-notification click after
+            Windows COM-activates the app via a toast in Action Center.
+            </summary>
+            <param name="profileName">The profile name (same value used on CoreCefViewControllerOptions.ProfileName).</param>
+            <param name="incognito">Whether the profile is incognito.</param>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewEnvironment.IsSoftwareCompositingAsync">
+            <summary>
+            Returns whether the Chromium compositor is currently running on the
+            software path (GPU compositing disabled, or GPU process up but on
+            SwiftShader). 
+            </summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewEnvironment.SetServiceWorkerDebuggerStartTimeout(System.Int32)">
+            <summary>
+            Set the timeout in seconds for service workers to start.
+            </summary>
+            <param name="seconds">Timeout in seconds (0 = disabled)</param>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewEnvironment.SetAllowedChromeUrls(System.String[])">
+            <summary>
+            Sets the chrome:// URL allowlist for browsers created outside the
+            normal popup flow (e.g. a link click in DevTools that opens a new
+            browser window). Pass null to allow all chrome:// URLs (the
+            default); pass an empty array to block all chrome:// URLs. May be
+            called any time after the environment is created.
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewEnvironmentOptions.AdditionalBrowserArguments">
+            <summary>
+            Get or set additional browser arguments that are passed to DuckDuckGo.WebView.exe and chromium sub process
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewEnvironmentOptions.BrowserLogPath">
+            <summary>
+            Get or set browser log path
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewEnvironmentOptions.BrowserLogSeverity">
+            <summary>
+            Get or set browser log severity
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewEnvironmentOptions.DebugPort">
+            <summary>
+            Get or Set debug port for DuckDuckGo.WebView.exe
+            </summary>
+            <remarks>
+            <para>
+            <![CDATA[
+            Set to a value between 1024 and 65535 to enable remote debugging on the
+            specified port. Also configurable using the "remote-debugging-port"
+            command-line switch. Specifying 0 via the command-line switch will result
+            in the selection of an ephemeral port and the port number will be printed
+            as part of the WebSocket endpoint URL to stderr. If a cache directory path
+            is provided the port will also be written to the
+            <cache-dir>/DevToolsActivePort file. Remote debugging can be accessed by
+            loading the chrome://inspect page in Google Chrome. Port numbers 9222 and
+            9229 are discoverable by default. Other port numbers may need to be
+            configured via "Discover network targets" on the Devices tab.
+            ]]>
+            </para>
+            </remarks>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewEnvironmentOptions.AcceptLanguageList">
+            <summary>
+            Get or set accept language list
+            </summary>
+            <remarks>
+            <para>
+            <![CDATA[
+            Affects the Accept-Languages header, navigator.languages and JS APIs
+            Expects a comma separated list like 'hu,en-US,en'
+            ]]>
+            </para>
+            </remarks>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewEnvironmentOptions.DisplayLanguage">
+            <summary>
+            Get or set display language
+            </summary>
+            <remarks>
+            <para>
+            <![CDATA[
+            Language of Chromium driver error pages, pop-up modals, etc
+            Expects a language code like 'en-GB', 'hu-HU', etc
+            ]]>
+            </para>
+            </remarks>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.IoPending">
+            <summary>
+            An asynchronous IO operation is not yet complete.  This usually does not
+            indicate a fatal error.  Typically this error will be generated as a
+            notification to wait for some external notification that the IO operation
+            finally completed.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.Failed">
+            <summary>
+            A generic failure occurred.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.Aborted">
+            <summary>
+            An operation was aborted (due to user action).
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.InvalidArgument">
+            <summary>
+            An argument to the function is incorrect.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.InvalidHandle">
+            <summary>
+            The handle or file descriptor is invalid.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.FileNotFound">
+            <summary>
+            The file or directory cannot be found.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.TimedOut">
+            <summary>
+            An operation timed out.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.FileTooBig">
+            <summary>
+            The file is too large.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.Unexpected">
+            <summary>
+            An unexpected error.  This may be caused by a programming mistake or an
+            invalid assumption.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.AccessDenied">
+            <summary>
+            Permission to access a resource, other than the network, was denied.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.NotImplemented">
+            <summary>
+            The operation failed because of unimplemented functionality.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.InsufficientResources">
+            <summary>
+            There were not enough resources to complete the operation.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.OutOfMemory">
+            <summary>
+            Memory allocation failed.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.UploadFileChanged">
+            <summary>
+            The file upload failed because the file's modification time was different
+            from the expectation.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.SocketNotConnected">
+            <summary>
+            The socket is not connected.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.FileExists">
+            <summary>
+            The file already exists.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.FilePathTooLong">
+            <summary>
+            The path or file name is too long.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.FileNoSpace">
+            <summary>
+            Not enough room left on the disk.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.FileVirusInfected">
+            <summary>
+            The file has a virus.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.BlockedByClient">
+            <summary>
+            The client chose to block the request.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.NetworkChanged">
+            <summary>
+            The network changed.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.BlockedByAdministrator">
+            <summary>
+            The request was blocked by the URL block list configured by the domain
+            administrator.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.SocketIsConnected">
+            <summary>
+            The socket is already connected.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.UploadStreamRewindNotSupported">
+            <summary>
+            The upload failed because the upload stream needed to be re-read, due to a
+            retry or a redirect, but the upload stream doesn't support that operation.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ContextShutDown">
+            <summary>
+            The request failed because the URLRequestContext is shutting down, or has
+            been shut down.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.BlockedByResponse">
+            <summary>
+            The request failed because the response was delivered along with requirements
+            which are not met ('X-Frame-Options' and 'Content-Security-Policy' ancestor
+            checks and 'Cross-Origin-Resource-Policy' for instance).
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CleartextNotPermitted">
+            <summary>
+            The request was blocked by system policy disallowing some or all cleartext
+            requests. Used for NetworkSecurityPolicy on Android.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.BlockedByCsp">
+            <summary>
+            The request was blocked by a Content Security Policy
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.BlockedByOrb">
+            <summary>
+            The request was blocked by CORB or ORB.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.NetworkAccessRevoked">
+            <summary>
+            The request was blocked because it originated from a frame that has disabled
+            network access.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.BlockedByFingerprintingProtection">
+            <summary>
+            The request was blocked by fingerprinting protections.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.BlockedInIncognitoByAdministrator">
+            <summary>
+            The request was blocked by the Incognito Mode URL block list configured by
+            the domain administrator.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.LocalNetworkPermissionMissing">
+            <summary>
+            The request was blocked because the local network permission is missing.
+            Note that this is different from BLOCKED_BY_LOCAL_NETWORK_ACCESS_CHECKS
+            which is specifically for a CORS error code.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ConnectionClosed">
+            <summary>
+            A connection was closed (corresponding to a TCP FIN).
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ConnectionReset">
+            <summary>
+            A connection was reset (corresponding to a TCP RST).
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ConnectionRefused">
+            <summary>
+            A connection attempt was refused.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ConnectionAborted">
+            <summary>
+            A connection timed out as a result of not receiving an ACK for data sent.
+            This can include a FIN packet that did not get ACK'd.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ConnectionFailed">
+            <summary>
+            A connection attempt failed.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.NameNotResolved">
+            <summary>
+            The host name could not be resolved.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.InternetDisconnected">
+            <summary>
+            The Internet connection has been lost.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.SslProtocolError">
+            <summary>
+            An SSL protocol error occurred.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.AddressInvalid">
+            <summary>
+            The IP address or port number is invalid (e.g., cannot connect to the IP
+            address 0 or the port 0).
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.AddressUnreachable">
+            <summary>
+            The IP address is unreachable.  This usually means that there is no route to
+            the specified host or network.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.SslClientAuthCertNeeded">
+            <summary>
+            The server requested a client certificate for SSL client authentication.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.TunnelConnectionFailed">
+            <summary>
+            A tunnel connection through the proxy could not be established. For more info
+            see the comment on PROXY_UNABLE_TO_CONNECT_TO_DESTINATION.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.SslVersionOrCipherMismatch">
+            <summary>
+            The client and server don't support a common SSL protocol version or
+            cipher suite.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.SslRenegotiationRequested">
+            <summary>
+            The server requested a renegotiation (rehandshake).
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ProxyAuthUnsupported">
+            <summary>
+            The proxy requested authentication (for tunnel establishment) with an
+            unsupported method.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.BadSslClientAuthCert">
+            <summary>
+            The SSL handshake failed because of a bad or missing client certificate.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ConnectionTimedOut">
+            <summary>
+            A connection attempt timed out.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.HostResolverQueueTooLarge">
+            <summary>
+            There are too many pending DNS resolves, so a request in the queue was
+            aborted.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.SocksConnectionFailed">
+            <summary>
+            Failed establishing a connection to the SOCKS proxy server for a target host.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.SocksConnectionHostUnreachable">
+            <summary>
+            The SOCKS proxy server failed establishing connection to the target host
+            because that host is unreachable.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.AlpnNegotiationFailed">
+            <summary>
+            The request to negotiate an alternate protocol failed.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.SslNoRenegotiation">
+            <summary>
+            The peer sent an SSL no_renegotiation alert message.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.WinsockUnexpectedWrittenBytes">
+            <summary>
+            Winsock sometimes reports more data written than passed.  This is probably
+            due to a broken LSP.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.SslDecompressionFailureAlert">
+            <summary>
+            An SSL peer sent us a fatal decompression_failure alert. This typically
+            occurs when a peer selects DEFLATE compression in the mistaken belief that
+            it supports it.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.SslBadRecordMacAlert">
+            <summary>
+            An SSL peer sent us a fatal bad_record_mac alert. This has been observed
+            from servers with buggy DEFLATE support.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ProxyAuthRequested">
+            <summary>
+            The proxy requested authentication (for tunnel establishment).
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ProxyConnectionFailed">
+            <summary>
+            Could not create a connection to the proxy server. An error occurred
+            either in resolving its name, or in connecting a socket to it.
+            Note that this does NOT include failures during the actual "CONNECT" method
+            of an HTTP proxy.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.MandatoryProxyConfigurationFailed">
+            <summary>
+            A mandatory proxy configuration could not be used. Currently this means
+            that a mandatory PAC script could not be fetched, parsed or executed.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.PreconnectMaxSocketLimit">
+            <summary>
+            We've hit the max socket limit for the socket pool while preconnecting.  We
+            don't bother trying to preconnect more sockets.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.SslClientAuthPrivateKeyAccessDenied">
+            <summary>
+            The permission to use the SSL client certificate's private key was denied.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.SslClientAuthCertNoPrivateKey">
+            <summary>
+            The SSL client certificate has no private key.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ProxyCertificateInvalid">
+            <summary>
+            The certificate presented by the HTTPS Proxy was invalid.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.NameResolutionFailed">
+            <summary>
+            An error occurred when trying to do a name resolution (DNS).
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.NetworkAccessDenied">
+            <summary>
+            Permission to access the network was denied. This is used to distinguish
+            errors that were most likely caused by a firewall from other access denied
+            errors. See also ERR_ACCESS_DENIED.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.TemporarilyThrottled">
+            <summary>
+            The request throttler module cancelled this request to avoid DDOS.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.SslClientAuthSignatureFailed">
+            <summary>
+            We were unable to sign the CertificateVerify data of an SSL client auth
+            handshake with the client certificate's private key.
+            Possible causes for this include the user implicitly or explicitly
+            denying access to the private key, the private key may not be valid for
+            signing, the key may be relying on a cached handle which is no longer
+            valid, or the CSP won't allow arbitrary data to be signed.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.MsgTooBig">
+            <summary>
+            The message was too large for the transport.  (for example a UDP message
+            which exceeds size threshold).
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.WsProtocolError">
+            <summary>
+            Websocket protocol error. Indicates that we are terminating the connection
+            due to a malformed frame or other protocol violation.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.AddressInUse">
+            <summary>
+            Returned when attempting to bind an address that is already in use.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.SslPinnedKeyNotInCertChain">
+            <summary>
+            The certificate didn't match the built-in public key pins for the host name.
+            The pins are set in net/http/transport_security_state.cc and require that
+            one of a set of public keys exist on the path from the leaf to the root.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ClientAuthCertTypeUnsupported">
+            <summary>
+            Server request for client certificate did not contain any types we support.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.SslDecryptErrorAlert">
+            <summary>
+            An SSL peer sent us a fatal decrypt_error alert. This typically occurs when
+            a peer could not correctly verify a signature (in CertificateVerify or
+            ServerKeyExchange) or validate a Finished message.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.WsThrottleQueueTooLarge">
+            <summary>
+            There are too many pending WebSocketJob instances, so the new job was not
+            pushed to the queue.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.SslServerCertChanged">
+            <summary>
+            The SSL server certificate changed in a renegotiation.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.SslUnrecognizedNameAlert">
+            <summary>
+            The SSL server sent us a fatal unrecognized_name alert.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.SocketSetReceiveBufferSizeError">
+            <summary>
+            Failed to set the socket's receive buffer size as requested.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.SocketSetSendBufferSizeError">
+            <summary>
+            Failed to set the socket's send buffer size as requested.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.SocketReceiveBufferSizeUnchangeable">
+            <summary>
+            Failed to set the socket's receive buffer size as requested, despite success
+            return code from setsockopt.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.SocketSendBufferSizeUnchangeable">
+            <summary>
+            Failed to set the socket's send buffer size as requested, despite success
+            return code from setsockopt.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.SslClientAuthCertBadFormat">
+            <summary>
+            Failed to import a client certificate from the platform store into the SSL
+            library.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.IcannNameCollision">
+            <summary>
+            Resolving a hostname to an IP address list included the IPv4 address
+            "127.0.53.53". This is a special IP address which ICANN has recommended to
+            indicate there was a name collision, and alert admins to a potential
+            problem.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.SslServerCertBadFormat">
+            <summary>
+            The SSL server presented a certificate which could not be decoded. This is
+            not a certificate error code as no X509Certificate object is available. This
+            error is fatal.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CtSthParsingFailed">
+            <summary>
+            Certificate Transparency: Received a signed tree head that failed to parse.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CtSthIncomplete">
+            <summary>
+            Certificate Transparency: Received a signed tree head whose JSON parsing was
+            OK but was missing some of the fields.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.UnableToReuseConnectionForProxyAuth">
+            <summary>
+            The attempt to reuse a connection to send proxy auth credentials failed
+            before the AuthController was used to generate credentials. The caller should
+            reuse the controller with a new connection. This error is only used
+            internally by the network stack.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CtConsistencyProofParsingFailed">
+            <summary>
+            Certificate Transparency: Failed to parse the received consistency proof.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.SslObsoleteCipher">
+            <summary>
+            The SSL server required an unsupported cipher suite that has since been
+            removed. This error will temporarily be signaled on a fallback for one or two
+            releases immediately following a cipher suite's removal, after which the
+            fallback will be removed.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.WsUpgrade">
+            <summary>
+            When a WebSocket handshake is done successfully and the connection has been
+            upgraded, the URLRequest is cancelled with this error code.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ReadIfReadyNotImplemented">
+            <summary>
+            Socket ReadIfReady support is not implemented. This error should not be user
+            visible, because the normal Read() method is used as a fallback.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.NoBufferSpace">
+            <summary>
+            No socket buffer space is available.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.SslClientAuthNoCommonAlgorithms">
+            <summary>
+            There were no common signature algorithms between our client certificate
+            private key and the server's preferences.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.EarlyDataRejected">
+            <summary>
+            TLS 1.3 early data was rejected by the server. This will be received before
+            any data is returned from the socket. The request should be retried with
+            early data disabled.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.WrongVersionOnEarlyData">
+            <summary>
+            TLS 1.3 early data was offered, but the server responded with TLS 1.2 or
+            earlier. This is an internal error code to account for a
+            backwards-compatibility issue with early data and TLS 1.2. It will be
+            received before any data is returned from the socket. The request should be
+            retried with early data disabled.
+            See https://tools.ietf.org/html/rfc8446#appendix-D.3 for details.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.Tls13DowngradeDetected">
+            <summary>
+            TLS 1.3 was enabled, but a lower version was negotiated and the server
+            returned a value indicating it supported TLS 1.3. This is part of a security
+            check in TLS 1.3, but it may also indicate the user is behind a buggy
+            TLS-terminating proxy which implemented TLS 1.2 incorrectly. (See
+            https://crbug.com/boringssl/226.)
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.SslKeyUsageIncompatible">
+            <summary>
+            The server's certificate has a keyUsage extension incompatible with the
+            negotiated TLS key exchange method.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.InvalidEchConfigList">
+            <summary>
+            The ECHConfigList fetched over DNS cannot be parsed.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.EchNotNegotiated">
+            <summary>
+            ECH was enabled, but the server was unable to decrypt the encrypted
+            ClientHello.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.EchFallbackCertificateInvalid">
+            <summary>
+            ECH was enabled, the server was unable to decrypt the encrypted ClientHello,
+            and additionally did not present a certificate valid for the public name.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ProxyUnableToConnectToDestination">
+            <summary>
+            An attempt to proxy a request failed because the proxy wasn't able to
+            successfully connect to the destination. This likely indicates an issue with
+            the request itself (for instance, the hostname failed to resolve to an IP
+            address or the destination server refused the connection). This error code
+            is used to indicate that the error is outside the control of the proxy server
+            and thus the proxy chain should not be marked as bad. This is in contrast to
+            ERR_TUNNEL_CONNECTION_FAILED which is used for general purpose errors
+            connecting to the proxy and by the proxy request response handling when a
+            proxy delegate doesn't indicate via a different error code whether proxy
+            fallback should occur. Note that for IP Protection proxies this error code
+            causes the proxy to be marked as bad since the preference is to fail open for
+            general purpose errors, but for other proxies this error does not cause the
+            proxy to be marked as bad.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ProxyDelegateCanceledConnectRequest">
+            <summary>
+            Some implementations of ProxyDelegate query a separate entity to know whether
+            it should cancel tunnel prior to:
+            - The HTTP CONNECT requests being sent out
+            - The HTTP CONNECT response being parsed by //net
+            An example is CronetProxyDelegate: Cronet allows developers to decide whether
+            the tunnel being established should be canceled.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CertCommonNameInvalid">
+            <summary>
+            The server responded with a certificate whose common name did not match
+            the host name.  This could mean:
+            1. An attacker has redirected our traffic to their server and is
+            presenting a certificate for which they know the private key.
+            2. The server is misconfigured and responding with the wrong cert.
+            3. The user is on a wireless network and is being redirected to the
+            network's login page.
+            4. The OS has used a DNS search suffix and the server doesn't have
+            a certificate for the abbreviated name in the address bar.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CertDateInvalid">
+            <summary>
+            The server responded with a certificate that, by our clock, appears to
+            either not yet be valid or to have expired.  This could mean:
+            1. An attacker is presenting an old certificate for which they have
+            managed to obtain the private key.
+            2. The server is misconfigured and is not presenting a valid cert.
+            3. Our clock is wrong.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CertAuthorityInvalid">
+            <summary>
+            The server responded with a certificate that is signed by an authority
+            we don't trust.  The could mean:
+            1. An attacker has substituted the real certificate for a cert that
+            contains their public key and is signed by their cousin.
+            2. The server operator has a legitimate certificate from a CA we don't
+            know about, but should trust.
+            3. The server is presenting a self-signed certificate, providing no
+            defense against active attackers (but foiling passive attackers).
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CertContainsErrors">
+            <summary>
+            The server responded with a certificate that contains errors.
+            This error is not recoverable.
+            MSDN describes this error as follows:
+            "The SSL certificate contains errors."
+            NOTE: It's unclear how this differs from ERR_CERT_INVALID. For consistency,
+            use that code instead of this one from now on.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CertNoRevocationMechanism">
+            <summary>
+            The certificate has no mechanism for determining if it is revoked.  In
+            effect, this certificate cannot be revoked.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CertUnableToCheckRevocation">
+            <summary>
+            Revocation information for the security certificate for this site is not
+            available.  This could mean:
+            1. An attacker has compromised the private key in the certificate and is
+            blocking our attempt to find out that the cert was revoked.
+            2. The certificate is unrevoked, but the revocation server is busy or
+            unavailable.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CertRevoked">
+            <summary>
+            The server responded with a certificate has been revoked.
+            We have the capability to ignore this error, but it is probably not the
+            thing to do.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CertInvalid">
+            <summary>
+            The server responded with a certificate that is invalid.
+            This error is not recoverable.
+            MSDN describes this error as follows:
+            "The SSL certificate is invalid."
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CertWeakSignatureAlgorithm">
+            <summary>
+            The server responded with a certificate that is signed using a weak
+            signature algorithm.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CertNonUniqueName">
+            <summary>
+            The host name specified in the certificate is not unique.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CertWeakKey">
+            <summary>
+            The server responded with a certificate that contains a weak key (e.g.
+            a too-small RSA key).
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CertNameConstraintViolation">
+            <summary>
+            The certificate claimed DNS names that are in violation of name constraints.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CertValidityTooLong">
+            <summary>
+            The certificate's validity period is too long.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CertificateTransparencyRequired">
+            <summary>
+            Certificate Transparency was required for this connection, but the server
+            did not provide CT information that complied with the policy.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CertKnownInterceptionBlocked">
+            <summary>
+            The certificate is known to be used for interception by an entity other
+            the device owner.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CertSelfSignedLocalNetwork">
+            <summary>
+            The certificate is self signed and it's being used for either an RFC1918 IP
+            literal URL, or a url ending in .local.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CertEnd">
+            <summary>
+            The value immediately past the last certificate error code.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.InvalidUrl">
+            <summary>
+            The URL is invalid.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.DisallowedUrlScheme">
+            <summary>
+            The scheme of the URL is disallowed.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.UnknownUrlScheme">
+            <summary>
+            The scheme of the URL is unknown.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.InvalidRedirect">
+            <summary>
+            Attempting to load an URL resulted in a redirect to an invalid URL.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.TooManyRedirects">
+            <summary>
+            Attempting to load an URL resulted in too many redirects.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.UnsafeRedirect">
+            <summary>
+            Attempting to load an URL resulted in an unsafe redirect (e.g., a redirect
+            to file:// is considered unsafe).
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.UnsafePort">
+            <summary>
+            Attempting to load an URL with an unsafe port number.  These are port
+            numbers that correspond to services, which are not robust to spurious input
+            that may be constructed as a result of an allowed web construct (e.g., HTTP
+            looks a lot like SMTP, so form submission to port 25 is denied).
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.InvalidResponse">
+            <summary>
+            The server's response was invalid.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.InvalidChunkedEncoding">
+            <summary>
+            Error in chunked transfer encoding.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.MethodNotSupported">
+            <summary>
+            The server did not support the request method.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.UnexpectedProxyAuth">
+            <summary>
+            The response was 407 (Proxy Authentication Required), yet we did not send
+            the request to a proxy.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.EmptyResponse">
+            <summary>
+            The server closed the connection without sending any data.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ResponseHeadersTooBig">
+            <summary>
+            The headers section of the response is too large.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.PacScriptFailed">
+            <summary>
+            The evaluation of the PAC script failed.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.RequestRangeNotSatisfiable">
+            <summary>
+            The response was 416 (Requested range not satisfiable) and the server cannot
+            satisfy the range requested.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.MalformedIdentity">
+            <summary>
+            The identity used for authentication is invalid.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ContentDecodingFailed">
+            <summary>
+            Content decoding of the response body failed.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.NetworkIoSuspended">
+            <summary>
+            An operation could not be completed because all network IO
+            is suspended.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.NoSupportedProxies">
+            <summary>
+            There are no supported proxies in the provided list.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.Http2ProtocolError">
+            <summary>
+            There is an HTTP/2 protocol error.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.InvalidAuthCredentials">
+            <summary>
+            Credentials could not be established during HTTP Authentication.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.UnsupportedAuthScheme">
+            <summary>
+            An HTTP Authentication scheme was tried which is not supported on this
+            machine.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.EncodingDetectionFailed">
+            <summary>
+            Detecting the encoding of the response failed.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.MissingAuthCredentials">
+            <summary>
+            (GSSAPI) No Kerberos credentials were available during HTTP Authentication.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.UnexpectedSecurityLibraryStatus">
+            <summary>
+            An unexpected, but documented, SSPI or GSSAPI status code was returned.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.MisconfiguredAuthEnvironment">
+            <summary>
+            The environment was not set up correctly for authentication (for
+            example, no KDC could be found or the principal is unknown.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.UndocumentedSecurityLibraryStatus">
+            <summary>
+            An undocumented SSPI or GSSAPI status code was returned.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ResponseBodyTooBigToDrain">
+            <summary>
+            The HTTP response was too big to drain.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ResponseHeadersMultipleContentLength">
+            <summary>
+            The HTTP response contained multiple distinct Content-Length headers.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.IncompleteHttp2Headers">
+            <summary>
+            HTTP/2 headers have been received, but not all of them - status or version
+            headers are missing, so we're expecting additional frames to complete them.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.PacNotInDhcp">
+            <summary>
+            No PAC URL configuration could be retrieved from DHCP. This can indicate
+            either a failure to retrieve the DHCP configuration, or that there was no
+            PAC URL configured in DHCP.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ResponseHeadersMultipleContentDisposition">
+            <summary>
+            The HTTP response contained multiple Content-Disposition headers.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ResponseHeadersMultipleLocation">
+            <summary>
+            The HTTP response contained multiple Location headers.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.Http2ServerRefusedStream">
+            <summary>
+            HTTP/2 server refused the request without processing, and sent either a
+            GOAWAY frame with error code NO_ERROR and Last-Stream-ID lower than the
+            stream id corresponding to the request indicating that this request has not
+            been processed yet, or a RST_STREAM frame with error code REFUSED_STREAM.
+            Client MAY retry (on a different connection).  See RFC7540 Section 8.1.4.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.Http2PingFailed">
+            <summary>
+            HTTP/2 server didn't respond to the PING message.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ContentLengthMismatch">
+            <summary>
+            The HTTP response body transferred fewer bytes than were advertised by the
+            Content-Length header when the connection is closed.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.IncompleteChunkedEncoding">
+            <summary>
+            The HTTP response body is transferred with Chunked-Encoding, but the
+            terminating zero-length chunk was never sent when the connection is closed.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.QuicProtocolError">
+            <summary>
+            There is a QUIC protocol error.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ResponseHeadersTruncated">
+            <summary>
+            The HTTP headers were truncated by an EOF.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.QuicHandshakeFailed">
+            <summary>
+            The QUIC crypto handshake failed.  This means that the server was unable
+            to read any requests sent, so they may be resent.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.Http2InadequateTransportSecurity">
+            <summary>
+            Transport security is inadequate for the HTTP/2 version.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.Http2FlowControlError">
+            <summary>
+            The peer violated HTTP/2 flow control.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.Http2FrameSizeError">
+            <summary>
+            The peer sent an improperly sized HTTP/2 frame.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.Http2CompressionError">
+            <summary>
+            Decoding or encoding of compressed HTTP/2 headers failed.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ProxyAuthRequestedWithNoConnection">
+            <summary>
+            Proxy Auth Requested without a valid Client Socket Handle.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.Http11Required">
+            <summary>
+            HTTP_1_1_REQUIRED error code received on HTTP/2 session.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ProxyHttp11Required">
+            <summary>
+            HTTP_1_1_REQUIRED error code received on HTTP/2 session to proxy.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.PacScriptTerminated">
+            <summary>
+            The PAC script terminated fatally and must be reloaded.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.InvalidHttpResponse">
+            <summary>
+            The server was expected to return an HTTP/1.x response, but did not. Rather
+            than treat it as HTTP/0.9, this error is returned.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ContentDecodingInitFailed">
+            <summary>
+            Initializing content decoding failed.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.Http2RstStreamNoErrorReceived">
+            <summary>
+            Received HTTP/2 RST_STREAM frame with NO_ERROR error code.  This error should
+            be handled internally by HTTP/2 code, and should not make it above the
+            SpdyStream layer.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.TooManyRetries">
+            <summary>
+            An HTTP transaction was retried too many times due for authentication or
+            invalid certificates. This may be due to a bug in the net stack that would
+            otherwise infinite loop, or if the server or proxy continually requests fresh
+            credentials or presents a fresh invalid certificate.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.Http2StreamClosed">
+            <summary>
+            Received an HTTP/2 frame on a closed stream.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.HttpResponseCodeFailure">
+            <summary>
+            The server returned a non-2xx HTTP response code.
+            Note that this error is only used by certain APIs that interpret the HTTP
+            response itself. URLRequest for instance just passes most non-2xx
+            response back as success.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.QuicCertRootNotKnown">
+            <summary>
+            The certificate presented on a QUIC connection does not chain to a known root
+            and the origin connected to is not on a list of domains where unknown roots
+            are allowed.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.QuicGoawayRequestCanBeRetried">
+            <summary>
+            A GOAWAY frame has been received indicating that the request has not been
+            processed and is therefore safe to retry on a different connection.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.TooManyAcceptChRestarts">
+            <summary>
+            The ACCEPT_CH restart has been triggered too many times
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.InconsistentIpAddressSpace">
+            <summary>
+            The IP address space of the remote endpoint differed from the previous
+            observed value during the same request. Any cache entry for the affected
+            request should be invalidated.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CachedIpAddressSpaceBlockedByLocalNetworkAccessPolicy">
+            <summary>
+            The IP address space of the cached remote endpoint is blocked by private
+            network access check.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.BlockedByLocalNetworkAccessChecks">
+            <summary>
+            The connection is blocked by private network access checks.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ZstdWindowSizeTooBig">
+            <summary>
+            Content decoding failed due to the zstd window size being too big (over 8MB).
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.DictionaryLoadFailed">
+            <summary>
+            The compression dictionary cannot be loaded.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.UnexpectedContentDictionaryHeader">
+            <summary>
+            The header of dictionary compressed stream does not match the expected value.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CacheMiss">
+            <summary>
+            The cache does not have the requested entry.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CacheReadFailure">
+            <summary>
+            Unable to read from the disk cache.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CacheWriteFailure">
+            <summary>
+            Unable to write to the disk cache.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CacheOperationNotSupported">
+            <summary>
+            The operation is not supported for this entry.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CacheOpenFailure">
+            <summary>
+            The disk cache is unable to open this entry.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CacheCreateFailure">
+            <summary>
+            The disk cache is unable to create this entry.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CacheRace">
+            <summary>
+            Multiple transactions are racing to create disk cache entries. This is an
+            internal error returned from the HttpCache to the HttpCacheTransaction that
+            tells the transaction to restart the entry-creation logic because the state
+            of the cache has changed.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CacheChecksumReadFailure">
+            <summary>
+            The cache was unable to read a checksum record on an entry. This can be
+            returned from attempts to read from the cache. It is an internal error,
+            returned by the SimpleCache backend, but not by any URLRequest methods
+            or members.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CacheChecksumMismatch">
+            <summary>
+            The cache found an entry with an invalid checksum. This can be returned from
+            attempts to read from the cache. It is an internal error, returned by the
+            SimpleCache backend, but not by any URLRequest methods or members.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CacheLockTimeout">
+            <summary>
+            Internal error code for the HTTP cache. The cache lock timeout has fired.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CacheAuthFailureAfterRead">
+            <summary>
+            Received a challenge after the transaction has read some data, and the
+            credentials aren't available.  There isn't a way to get them at that point.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CacheEntryNotSuitable">
+            <summary>
+            Internal not-quite error code for the HTTP cache. In-memory hints suggest
+            that the cache entry would not have been usable with the transaction's
+            current configuration (e.g. load flags, mode, etc.)
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CacheDoomFailure">
+            <summary>
+            The disk cache is unable to doom this entry.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CacheOpenOrCreateFailure">
+            <summary>
+            The disk cache is unable to open or create this entry.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.InsecureResponse">
+            <summary>
+            The server's response was insecure (e.g. there was a cert error).
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.NoPrivateKeyForCert">
+            <summary>
+            An attempt to import a client certificate failed, as the user's key
+            database lacked a corresponding private key.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.AddUserCertFailed">
+            <summary>
+            An error adding a certificate to the OS certificate database.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.InvalidSignedExchange">
+            <summary>
+            An error occurred while handling a signed exchange.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.InvalidWebBundle">
+            <summary>
+            An error occurred while handling a Web Bundle source.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.TrustTokenOperationFailed">
+            <summary>
+            A Trust Tokens protocol operation-executing request failed for one of a
+            number of reasons (precondition failure, internal error, bad response).
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.TrustTokenOperationSuccessWithoutSendingRequest">
+            <summary>
+            When handling a Trust Tokens protocol operation-executing request, the system
+            was able to execute the request's Trust Tokens operation without sending the
+            request to its destination: for instance, the results could have been present
+            in a local cache (for redemption) or the operation could have been diverted
+            to a local provider (for "platform-provided" issuance).
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.HttpengineProviderInUse">
+            <summary>
+            This is a placeholder value that should never be used within //net.
+            When Cronet APIs are being backed by HttpEngine (i.e., HttpEngineProvider is
+            being used), org.chromium.net.NetworkException#getCronetInternalErrorCode is
+            not supported (android.net.http.NetworkException#getCronetInternalErrorCode
+            does not exist). In this scenario, getCronetInternalErrorCode will always
+            return this error. This is a first step towards the deprecation of
+            getCronetInternalErrorCode.
+            Temporarily terminate, then restart, ITTT to avoid unsupported nesting.
+            LINT.ThenChange(
+            //tools/metrics/histograms/enums.xml:HTTPResponseAndNetErrorCodes,
+            //tools/metrics/histograms/enums.xml:NetErrorCodes,
+            )
+            LINT.IfChange(HTTPENGINE_PROVIDER_IN_USE)
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.Pkcs12ImportBadPassword">
+            <summary>
+            PKCS #12 import failed due to incorrect password.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.Pkcs12ImportFailed">
+            <summary>
+            PKCS #12 import failed due to other error.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ImportCaCertNotCa">
+            <summary>
+            CA import failed - not a CA cert.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ImportCertAlreadyExists">
+            <summary>
+            Import failed - certificate already exists in database.
+            Note it's a little weird this is an error but reimporting a PKCS12 is ok
+            (no-op).  That's how Mozilla does it, though.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ImportCaCertFailed">
+            <summary>
+            CA import failed due to some other error.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.ImportServerCertFailed">
+            <summary>
+            Server certificate import failed due to some internal error.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.Pkcs12ImportInvalidMac">
+            <summary>
+            PKCS #12 import failed due to invalid MAC.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.Pkcs12ImportInvalidFile">
+            <summary>
+            PKCS #12 import failed due to invalid/corrupt file.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.Pkcs12ImportUnsupported">
+            <summary>
+            PKCS #12 import failed due to unsupported features.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.KeyGenerationFailed">
+            <summary>
+            Key generation failed.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.PrivateKeyExportFailed">
+            <summary>
+            Failure to export private key.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.SelfSignedCertGenerationFailed">
+            <summary>
+            Self-signed certificate generation failed.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CertDatabaseChanged">
+            <summary>
+            The certificate database changed in some way.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.CertVerifierChanged">
+            <summary>
+            The certificate verifier configuration changed in some way.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.DnsMalformedResponse">
+            <summary>
+            DNS resolver received a malformed response.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.DnsServerRequiresTcp">
+            <summary>
+            DNS server requires TCP
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.DnsTimedOut">
+            <summary>
+            DNS transaction timed out.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.DnsCacheMiss">
+            <summary>
+            The entry was not found in cache or other local sources, for lookups where
+            only local sources were queried.
+            TODO(ericorth): Consider renaming to DNS_LOCAL_MISS or something like that as
+            the cache is not necessarily queried either.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.DnsSearchEmpty">
+            <summary>
+            Suffix search list rules prevent resolution of the given host name.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.DnsSortError">
+            <summary>
+            Failed to sort addresses according to RFC3484.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.DnsSecureResolverHostnameResolutionFailed">
+            <summary>
+            Failed to resolve the hostname of a DNS-over-HTTPS server.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.DnsNameHttpsOnly">
+            <summary>
+            DNS identified the request as disallowed for insecure connection (http/ws).
+            Error should be handled as if an HTTP redirect was received to redirect to
+            https or wss.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.DnsRequestCancelled">
+            <summary>
+            All DNS requests associated with this job have been cancelled.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.DnsNoMatchingSupportedAlpn">
+            <summary>
+            The hostname resolution of HTTPS record was expected to be resolved with
+            alpn values of supported protocols, but did not.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.DnsSecureProbeRecordInvalid">
+            <summary>
+            When checking whether secure DNS can be used, the response returned for the
+            requested probe record either had no answer or was invalid.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.DnsCacheInvalidationInProgress">
+            <summary>
+            Returned when DNS cache invalidation is in progress. This is a
+            transient error. Callers may want to retry later.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.DnsFormatError">
+            <summary>
+            The DNS server responded with a format error response code.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.DnsServerFailure">
+            <summary>
+            The DNS server responded with a server failure response code.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.DnsNotImplemented">
+            <summary>
+            The DNS server responded that the query type is not implemented.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.DnsRefused">
+            <summary>
+            The DNS server responded that the request was refused.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.DnsOtherFailure">
+            <summary>
+            The DNS server responded with an rcode indicating that the request failed,
+            but the rcode is not one that we have a specific error code for. In other
+            words, the rcode was not one of the following:
+            - NOERR
+            - FORMERR
+            - SERVFAIL
+            - NXDOMAIN
+            - NOTIMP
+            - REFUSED
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.BlobInvalidConstructionArguments">
+            <summary>
+            The construction arguments are invalid. This is considered a bad IPC.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.BlobOutOfMemory">
+            <summary>
+            We don't have enough memory for the blob.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.BlobFileWriteFailed">
+            <summary>
+            We couldn't create or write to a file. File system error, like a full disk.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.BlobSourceDiedInTransit">
+            <summary>
+            The renderer was destroyed while data was in transit.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.BlobDereferencedWhileBuilding">
+            <summary>
+            The renderer destructed the blob before it was done transferring, and there
+            were no outstanding references (no one is waiting to read) to keep the
+            blob alive.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.BlobReferencedBlobBroken">
+            <summary>
+            A blob that we referenced during construction is broken, or a browser-side
+            builder tries to build a blob with a blob reference that isn't finished
+            constructing.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewErrorCode.BlobReferencedFileUnavailable">
+            <summary>
+            A file that we referenced during construction is not accessible to the
+            renderer trying to create the blob.
+            </summary>
+        </member>
+        <member name="T:DuckDuckGo.CefView.CoreCefViewExtension">
+            <summary>
+            Represents a browser extension.
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewExtension.Id">
+            <summary>
+            Gets the unique extension identifier.
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewExtension.Name">
+            <summary>
+            Gets the extension display name.
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewExtension.Description">
+            <summary>
+            Gets the extension description.
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewExtension.Path">
+            <summary>
+            Gets the path to the extension directory.
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewExtension.Url">
+            <summary>
+            Gets the extension URL.
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewExtension.Version">
+            <summary>
+            Gets the extension version.
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewExtension.IsEnabled">
+            <summary>
+            Gets whether the extension is currently enabled.
+            </summary>
+        </member>
+        <member name="T:DuckDuckGo.CefView.ExtensionUpdateFoundEventArgs">
+            <summary>
+            Event args for extension update found events.
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.ExtensionUpdateFoundEventArgs.ExtensionId">
+            <summary>
+            Gets the extension ID.
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.ExtensionUpdateFoundEventArgs.Version">
+            <summary>
+            Gets the new version that is available.
+            </summary>
+        </member>
+        <member name="T:DuckDuckGo.CefView.CoreCefViewExtensionManager">
+            <summary>
+            Manages browser extensions for a profile.
+            </summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewExtensionManager.GetExtensionsAsync">
+            <summary>
+            Gets all installed extensions.
+            </summary>
+            <returns>A list of installed extensions.</returns>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewExtensionManager.InstallExtensionAsync(System.String,System.Boolean)">
+            <summary>
+            Installs an extension from a CRX file.
+            </summary>
+            <param name="crxPath">Path to the CRX file.</param>
+            <param name="installImmediately">If true and an older version is installed, update immediately.</param>
+            <returns>The installed extension, or null if installation failed.</returns>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewExtensionManager.InstallUnpackedExtensionAsync(System.String)">
+            <summary>
+            Installs an unpacked extension from a directory.
+            </summary>
+            <param name="directoryPath">Path to the extension directory containing manifest.json.</param>
+            <returns>The installed extension, or null if installation failed.</returns>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewExtensionManager.EnableExtensionAsync(System.String)">
+            <summary>
+            Enables a previously disabled extension.
+            </summary>
+            <param name="extensionId">The extension ID.</param>
+            <returns>True if the extension is now enabled, false otherwise.</returns>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewExtensionManager.DisableExtensionAsync(System.String)">
+            <summary>
+            Disables an enabled extension.
+            </summary>
+            <param name="extensionId">The extension ID.</param>
+            <returns>True if the extension is now disabled, false otherwise.</returns>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewExtensionManager.UninstallExtensionAsync(System.String)">
+            <summary>
+            Uninstalls an extension.
+            </summary>
+            <param name="extensionId">The extension ID.</param>
+            <returns>True if the extension was uninstalled, false otherwise.</returns>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewExtensionManager.CheckForUpdates(System.String,System.Boolean)">
+            <summary>
+            Checks for updates for the specified extension.
+            </summary>
+            <param name="extensionId">The extension ID, or empty to check all extensions.</param>
+            <param name="installImmediately">If true, install updates immediately.</param>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewExtensionManager.GetExtensionPopupUrlAsync(System.String,System.Int32)">
+            <summary>
+            Gets the popup URL for an extension's browser action.
+            Returns the current popup URL which may have been modified at runtime via chrome.action.setPopup().
+            </summary>
+            <param name="extensionId">The extension ID.</param>
+            <param name="tabId">The tab ID to get the popup for, or -1 for the default popup.</param>
+            <returns>The popup URL, or null if the extension has no popup.</returns>
+        </member>
+        <member name="E:DuckDuckGo.CefView.CoreCefViewExtensionManager.ExtensionLoaded">
+            <summary>
+            Raised when an extension is loaded/enabled.
+            </summary>
+        </member>
+        <member name="E:DuckDuckGo.CefView.CoreCefViewExtensionManager.ExtensionUnloaded">
+            <summary>
+            Raised when an extension is unloaded/disabled.
+            </summary>
+        </member>
+        <member name="E:DuckDuckGo.CefView.CoreCefViewExtensionManager.ExtensionInstalled">
+            <summary>
+            Raised when a new extension is installed.
+            </summary>
+        </member>
+        <member name="E:DuckDuckGo.CefView.CoreCefViewExtensionManager.ExtensionUninstalled">
+            <summary>
+            Raised when an extension is uninstalled.
+            </summary>
+        </member>
+        <member name="E:DuckDuckGo.CefView.CoreCefViewExtensionManager.ExtensionInstallFailed">
+            <summary>
+            Raised when extension installation fails.
+            </summary>
+        </member>
+        <member name="E:DuckDuckGo.CefView.CoreCefViewExtensionManager.ExtensionUpdateFound">
+            <summary>
+            Raised when an extension update is found.
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewGetOrCreateProfileCompletedHandler.ErrorCode">
+            <summary>
+            Error code (0 on success).
+            </summary>
+        </member>
+        <member name="T:DuckDuckGo.CefView.CoreCefViewHistoryChangedEventArgs">
+            <summary>
+            Event args for HistoryChanged event containing navigation stack data.
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewHistoryChangedEventArgs.CurrentIndex">
+            <summary>
+            Gets the current index in the navigation stack, or -1 if not available.
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewHistoryChangedEventArgs.Entries">
+            <summary>
+            Gets the navigation entries, or null if not available.
+            </summary>
+        </member>
+        <member name="T:DuckDuckGo.CefView.CoreCefViewHttpRequestHeaders">
+            <summary>
+            HTTP request headers collection. Each header name is unique (case-insensitive).
+            All lookups, replacements, and removals are case-insensitive.
+            Header insertion order is preserved to maintain the original Chromium request header ordering.
+            </summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewHttpRequestHeaders.GetHeader(System.String)">
+            <summary>Gets the header value matching the name (case-insensitive), or null if not found.</summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewHttpRequestHeaders.Contains(System.String)">
+            <summary>Checks whether a header with the given name exists (case-insensitive).</summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewHttpRequestHeaders.SetHeader(System.String,System.String)">
+            <summary>
+            Adds or replaces a header (case-insensitive match). If a header with the
+            same name exists, it is replaced in-place preserving its position.
+            Otherwise the header is appended.
+            </summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewHttpRequestHeaders.RemoveHeader(System.String)">
+            <summary>Removes the header matching the name (case-insensitive), if present.</summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewHttpRequestHeaders.Clear">
+            <summary>Removes all headers.</summary>
+        </member>
+        <member name="T:DuckDuckGo.CefView.CoreCefViewHttpResponseHeaders">
+            <summary>
+            HTTP response headers collection. Multiple headers with the same name are allowed (e.g. Set-Cookie).
+            All lookups and removals are case-insensitive.
+            </summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewHttpResponseHeaders.GetHeader(System.String)">
+            <summary>Gets the first header value matching the name (case-insensitive), or null if not found.</summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewHttpResponseHeaders.GetHeaders(System.String)">
+            <summary>Gets an iterator over all header values matching the name (case-insensitive).</summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewHttpResponseHeaders.Contains(System.String)">
+            <summary>Checks whether a header with the given name exists (case-insensitive).</summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewHttpResponseHeaders.SetHeader(System.String,System.String)">
+            <summary>Appends a header. Multiple headers with the same name are permitted.</summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewHttpResponseHeaders.RemoveHeader(System.String)">
+            <summary>Removes all headers matching the name (case-insensitive).</summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewHttpResponseHeaders.Clear">
+            <summary>Removes all headers.</summary>
+        </member>
+        <member name="T:DuckDuckGo.CefView.CoreCefViewLaunchFailure">
+            <summary>
+            Contains browser process launch failure information.
+            Only provided when launch fails (null on success).
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewLaunchFailure.ErrorCode">
+            <summary>
+            HRESULT error code for the failure.
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewLaunchFailure.LastError">
+            <summary>
+            Win32 last error code.
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewLaunchFailure.LaunchProcessFailureReason">
+            <summary>
+            LaunchProcessFailureReason enum value (only meaningful when ErrorCode is HRESULT_BROWSER_START_FAILED_TO_LAUNCH_PROCESS)
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewLaunchFailure.ExitCode">
+            <summary>
+            Browser process exit code (only meaningful when ErrorCode is HRESULT_BROWSER_CRASHED)
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewLaunchFailure.LaunchAttempts">
+            <summary>
+            Number of launch attempts made (1 = no retries, 2+ = retries occurred)
+            </summary>
+        </member>
+        <member name="T:DuckDuckGo.CefView.CoreCefViewNavigationEntry">
+            <summary>
+            Represents a navigation entry in the browser history.
+            </summary>
+            <param name="Url">The URL of the navigation entry.</param>
+            <param name="Title">The title of the navigation entry.</param>
+            <param name="TransitionType">The transition type (see cef_transition_type_t values).</param>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewNavigationEntry.#ctor(System.String,System.String,System.Int32)">
+            <summary>
+            Represents a navigation entry in the browser history.
+            </summary>
+            <param name="Url">The URL of the navigation entry.</param>
+            <param name="Title">The title of the navigation entry.</param>
+            <param name="TransitionType">The transition type (see cef_transition_type_t values).</param>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewNavigationEntry.Url">
+            <summary>The URL of the navigation entry.</summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewNavigationEntry.Title">
+            <summary>The title of the navigation entry.</summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewNavigationEntry.TransitionType">
+            <summary>The transition type (see cef_transition_type_t values).</summary>
+        </member>
+        <member name="T:DuckDuckGo.CefView.CoreCefViewNotificationManager">
+            <summary>
+            Manages web notifications for a profile.
+            </summary>
+        </member>
+        <member name="E:DuckDuckGo.CefView.CoreCefViewNotificationManager.NotificationRequested">
+            <summary>
+            Raised when a web page requests to show a notification.
+            </summary>
+        </member>
+        <member name="E:DuckDuckGo.CefView.CoreCefViewNotificationManager.NotificationClosed">
+            <summary>
+            Raised when a web page programmatically closes a notification.
+            </summary>
+        </member>
+        <member name="E:DuckDuckGo.CefView.CoreCefViewNotificationManager.NotificationOpenWindow">
+            <summary>
+            Raised when a service worker calls clients.openWindow().
+            </summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewNotificationManager.NotifyNotificationClicked(System.String)">
+            <summary>
+            Notify the browser process that the user clicked on a non-persistent notification.
+            </summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewNotificationManager.NotifyPersistentNotificationClicked(System.String,System.String,System.Int32)">
+            <summary>
+            Notify the browser process that the user clicked on a persistent notification.
+            </summary>
+            <param name="notificationId">The notification identifier.</param>
+            <param name="origin">The origin (e.g. "https://example.com/") that registered the notification. Required for cold-start click dispatch because the host no longer has the original show-time state in memory.</param>
+            <param name="actionIndex">The zero-based index of the action button clicked, or -1 if the notification body itself was clicked.</param>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewNotificationManager.NotifyNotificationDismissed(System.String)">
+            <summary>
+            Notify the browser process that the user dismissed a non-persistent notification.
+            </summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewNotificationManager.NotifyPersistentNotificationDismissed(System.String,System.String)">
+            <summary>
+            Notify the browser process that the user dismissed a persistent notification.
+            </summary>
+            <param name="notificationId">The notification identifier.</param>
+            <param name="origin">The origin (e.g. "https://example.com/") that registered the notification. Required for cold-start dispatch because the host no longer has the original show-time state in memory.</param>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewPreferences.#ctor(System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,DuckDuckGo.CefView.CoreCefViewShortcutProfile[],System.Boolean,System.Boolean)">
+            <summary>
+            Backward-compatible constructor that accepts the old AllowChromeSchemes boolean.
+            true (allow all) maps to null; false (block all) maps to an empty array.
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewPrintSettings.Landscape">
+            <summary>
+            Set to true for landscape mode or false for portrait mode.
+            </summary>
+            <remarks>
+            Defaults to false
+            </remarks>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewPrintSettings.PrintBackground">
+            <summary>
+            Set to true to print background graphics.
+            </summary>
+            <remarks>
+            Defaults to false
+            </remarks>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewPrintSettings.PreferCssPageSize">
+            <summary>
+            Set to true to prefer page size as defined by css.
+            Defaults to false, in which case the content will be scaled to fit the paper size.
+            </summary>
+            <remarks>
+            Defaults to false
+            </remarks>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewPrintSettings.DisplayHeaderFooter">
+            <summary>
+            Set to true to display the header and/or footer
+            Modify |HeaderTemplate| and/or |FooterTemplate| to customize the display.
+            </summary>
+            <remarks>
+            Defaults to false
+            </remarks>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewPrintSettings.GenerateTaggedPdf">
+            <summary>
+            Set to true to generate tagged (accessible) PDF.
+            </summary>
+            <remarks>
+            Defaults to false
+            </remarks>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewPrintSettings.GenerateDocumentOutline">
+            <summary>
+            Set to true to generate a document outline.
+            </summary>
+            <remarks>
+            Defaults to false
+            </remarks>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewPrintSettings.Scale">
+            <summary>
+            The percentage to scale the PDF by before printing (e.g. .5 is 50%).
+            If this value is less than or equal to zero the default value of 1.0
+            will be used.
+            </summary>
+            <remarks>
+            Defaults to 1.0
+            </remarks>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewPrintSettings.PaperWidth">
+            <summary>
+            Output paper width in inches.
+            If this value is less than or equal to zero the default value (letter, 8.5 inches)
+            will be used.
+            </summary>
+            <remarks>
+            Defaults to 8.5
+            </remarks>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewPrintSettings.PaperHeight">
+            <summary>
+            Output paper height in inches.
+            If this value is less than or equal to zero the default value (letter, 11 inches)
+            will be used.
+            </summary>
+            <remarks>
+            Defaults to 11
+            </remarks>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewPrintSettings.MarginType">
+            <summary>
+            Margin type.
+            </summary>
+            <remarks>
+            Defaults to Default (margins of 1cm (~0.4 inches))
+            </remarks>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewPrintSettings.MarginTop">
+            <summary>
+            Margin top.
+            </summary>
+            <remarks>
+            Only used if |MarginType| == Custom.
+            </remarks>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewPrintSettings.MarginRight">
+            <summary>
+            Margin right.
+            </summary>
+            <remarks>
+            Only used if |MarginType| == Custom.
+            </remarks>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewPrintSettings.MarginBottom">
+            <summary>
+            Margin bottom.
+            </summary>
+            <remarks>
+            Only used if |MarginType| == Custom.
+            </remarks>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewPrintSettings.MarginLeft">
+            <summary>
+            Margin left.
+            </summary>
+            <remarks>
+            Only used if |MarginType| == Custom.
+            </remarks>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewPrintSettings.PageRanges">
+            <summary>
+            Paper ranges to print.
+            </summary>
+            <remarks>
+            Paper ranges to print, one based, e.g., '1-5, 8, 11-13'. Pages are printed
+            in the document order, not in the order specified, and no more than once.
+            Defaults to empty string, which implies the entire document is printed.
+            The page numbers are quietly capped to actual page count of the document,
+            and ranges beyond the end of the document are ignored. If this results in
+            no pages to print, an error is reported. It is an error to specify a range
+            with start greater than end.
+            </remarks>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewPrintSettings.HeaderTemplate">
+             <summary>
+             HTML template for the print header.
+             </summary>
+             <remarks>
+             Only displayed if |DisplayHeaderFooter| is true.
+             Should be valid HTML markup with
+             the following classes used to inject printing values into them:
+            
+             - date: formatted print date
+             - title: document title
+             - url: document location
+             - pageNumber: current page number
+             - totalPages: total pages in the document
+            
+             </remarks>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewPrintSettings.FooterTemplate">
+            <summary>
+            HTML template for the print footer.
+            </summary>
+            <remarks>
+            Only displayed if |DisplayHeaderFooter| is true.
+            Uses the same format as |HeaderTemplate|.
+            </remarks>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewProfile.ExtensionManager">
+            <summary>
+            Gets the extension manager for this profile.
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewProfile.NotificationManager">
+            <summary>
+            Gets the notification manager for this profile.
+            </summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewResourceResponseReceivedEventArgs.Uri">
+            <summary>The URL of the resource request.</summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewResourceResponseReceivedEventArgs.StatusCode">
+            <summary>HTTP status code of the response.</summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewResourceResponseReceivedEventArgs.RedirectUrl">
+            <summary>The redirect target URL, or empty string if not a redirect.</summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewResourceResponseReceivedEventArgs.ResponseHeaders">
+            <summary>Response headers.</summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewResourceResponseReceivedEventArgs.ResourceType">
+            <summary>CEF resource type.</summary>
+        </member>
+        <member name="T:DuckDuckGo.CefView.CoreCefViewResourceType">
+            <summary>
+            Resource type for a request. These values match cef_resource_type_t from CEF.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewResourceType.MainFrame">
+            <summary>Top level page.</summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewResourceType.SubFrame">
+            <summary>Frame or iframe.</summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewResourceType.Stylesheet">
+            <summary>CSS stylesheet.</summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewResourceType.Script">
+            <summary>External script.</summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewResourceType.Image">
+            <summary>Image (jpg/gif/png/etc).</summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewResourceType.FontResource">
+            <summary>Font.</summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewResourceType.SubResource">
+            <summary>Some other subresource. This is the default type if the actual type is unknown.</summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewResourceType.Object">
+            <summary>Object (or embed) tag for a plugin, or a resource that a plugin requested.</summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewResourceType.Media">
+            <summary>Media resource.</summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewResourceType.Worker">
+            <summary>Main resource of a dedicated worker.</summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewResourceType.SharedWorker">
+            <summary>Main resource of a shared worker.</summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewResourceType.Prefetch">
+            <summary>Explicitly requested prefetch.</summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewResourceType.Favicon">
+            <summary>Favicon.</summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewResourceType.Xhr">
+            <summary>XMLHttpRequest.</summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewResourceType.Ping">
+            <summary>A request for a ping.</summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewResourceType.ServiceWorker">
+            <summary>Main resource of a service worker.</summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewResourceType.CspReport">
+            <summary>A report of Content Security Policy violations.</summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewResourceType.PluginResource">
+            <summary>A resource that a plugin requested.</summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewResourceType.NavigationPreloadMainFrame">
+            <summary>A main-frame service worker navigation preload request.</summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewResourceType.NavigationPreloadSubFrame">
+            <summary>A sub-frame service worker navigation preload request.</summary>
+        </member>
+        <member name="T:DuckDuckGo.CefView.CoreCefViewWebContentVisibility">
+            <summary>
+            Should match the COM enum CefViewWebContentVisibility
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewWebContentVisibility.Hidden">
+            <summary>
+            The view is not part of any window (e.g. a non-active tab) or is part of a
+            window that is minimized or hidden (Cmd+H).
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewWebContentVisibility.Occluded">
+            <summary>
+            Deprecated: CEF treats `Occluded` the same as `Hidden`.
+            Occluded views are in the foreground tab of a browser window but are not
+            visible because it is covered by other windows and/or because it is outside
+            the bounds of the screen. This is a low-level determination made within
+            Chromium, and does not need to be managed by the browser layer.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.CoreCefViewWebContentVisibility.Visible">
+            <summary>
+            The view is visible on the screen.
+            </summary>
+        </member>
+        <member name="T:DuckDuckGo.CefView.WebResourceDecision">
+            <summary>
+            Decision for how to handle an intercepted web resource request.
+            </summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.WebResourceDecision.Allow">
+            <summary>Continue with no modifications.</summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.WebResourceDecision.AllowWithHeaders">
+            <summary>Continue with modified headers.</summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.WebResourceDecision.Block">
+            <summary>Serve synthetic response or cancel.</summary>
+        </member>
+        <member name="F:DuckDuckGo.CefView.WebResourceDecision.Content">
+            <summary>Serve synthetic content (custom schemes, surrogates).</summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewWebResourceRequestedEventArgs.RequestId">
+            <summary>Unique identifier for this request.</summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewWebResourceRequestedEventArgs.Uri">
+            <summary>The URL being requested.</summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewWebResourceRequestedEventArgs.Method">
+            <summary>HTTP method (GET, POST, etc.).</summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewWebResourceRequestedEventArgs.RequestHeaders">
+            <summary>The request headers.</summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewWebResourceRequestedEventArgs.ResourceType">
+            <summary>CEF resource type.</summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewWebResourceRequestedEventArgs.FrameUrl">
+            <summary>URL of the frame making the request.</summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewWebResourceRequestedEventArgs.IsMainFrame">
+            <summary>True if this is a main frame request.</summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewWebResourceRequestedEventArgs.Decision">
+            <summary>Decision for how to handle this request.</summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewWebResourceRequestedEventArgs.IsTrackerDomain">
+            <summary>Whether this request is to a known tracker domain (for cookie blocking).</summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewWebResourceRequestedEventArgs.RedirectUrl">
+            <summary>URL to redirect to (modifies request URL instead of blocking).</summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewWebResourceRequestedEventArgs.StatusCode">
+            <summary>HTTP status code for block response.</summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewWebResourceRequestedEventArgs.StatusText">
+            <summary>HTTP status text for block response.</summary>
+            <remarks>
+            If not set, the status text will be automatically generated based on the status code.
+            </remarks>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewWebResourceRequestedEventArgs.Resource">
+            <summary>Block response body bytes.</summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewWebResourceRequestedEventArgs.ResponseHeaders">
+            <summary>Response headers for block response.</summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewWebResourceRequestedEventArgs.Handled">
+            <summary>Deprecated — set Decision = Block instead.</summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewWebResourceRequestedEventArgs.MimeType">
+            <summary>Deprecated — use ResponseHeaders instead.</summary>
+        </member>
+        <member name="P:DuckDuckGo.CefView.CoreCefViewWebResourceRequestedEventArgs.ReasonPhrase">
+            <summary>Deprecated — use StatusText instead.</summary>
+        </member>
+        <member name="M:DuckDuckGo.CefView.CoreCefViewWebResourceRequestedEventArgs.GetDeferral">
+            <summary>
+            Gets a deferral object to defer the web resource request response.
+            Call Complete() on the returned deferral when the response is ready.
+            </summary>
+        </member>
+    </members>
+</doc>
